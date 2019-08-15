@@ -9,7 +9,7 @@ class HomePageTemp extends StatelessWidget {
       appBar: AppBar(
         title: Text('Componenet Temp'),
       ),
-      body: ListView(children: _crearItems()),
+      body: ListView(children: _crearItemsCorta()),
     );
   }
 
@@ -25,5 +25,17 @@ class HomePageTemp extends StatelessWidget {
     }
 
     return lista;
+  }
+
+  List<Widget> _crearItemsCorta() {
+    return opciones.map((item) {
+      return ListTile(
+        title: Text(item + '!'),
+        subtitle: Text('cualquiercosa'),
+        leading: Icon(Icons.account_balance),
+        trailing: Icon(Icons.keyboard_arrow_down),
+        onTap: () {},
+      );
+    }).toList();
   }
 }
