@@ -9,7 +9,7 @@ class CardPage extends StatelessWidget {
       ),
       body: ListView(
         padding: EdgeInsets.all(10.0),
-        children: <Widget>[_cardTipo1()],
+        children: <Widget>[_cardTipo1(), SizedBox(height: 30.0), _cardTipo2()],
       ),
     );
   }
@@ -41,4 +41,22 @@ class CardPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _cardTipo2() {
+  return Card(
+    child: Column(
+      children: <Widget>[
+        FadeInImage(
+          image: NetworkImage(
+              'https://cdn.mos.cms.futurecdn.net/FUE7XiFApEqWZQ85wYcAfM.jpg'),
+          placeholder: AssetImage('assets/jar-loading.gif'),
+          fadeInDuration: Duration(milliseconds: 200),
+          height: 300.0,
+          fit: BoxFit.cover,
+        ),
+        Container(padding: EdgeInsets.all(10.0), child: Text('No tengo idea')),
+      ],
+    ),
+  );
 }
