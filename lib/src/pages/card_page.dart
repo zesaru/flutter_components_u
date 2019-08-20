@@ -9,13 +9,28 @@ class CardPage extends StatelessWidget {
       ),
       body: ListView(
         padding: EdgeInsets.all(10.0),
-        children: <Widget>[_cardTipo1(), SizedBox(height: 30.0), _cardTipo2()],
+        children: <Widget>[
+          _cardTipo1(),
+          SizedBox(height: 30.0),
+          _cardTipo2(),
+          SizedBox(height: 30.0),
+          _cardTipo1(),
+          SizedBox(height: 30.0),
+          _cardTipo2(),
+          SizedBox(height: 30.0),
+          _cardTipo1(),
+          SizedBox(height: 30.0),
+          _cardTipo2(),
+          SizedBox(height: 30.0),
+        ],
       ),
     );
   }
 
   Widget _cardTipo1() {
     return Card(
+      elevation: 10.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -44,7 +59,7 @@ class CardPage extends StatelessWidget {
 }
 
 Widget _cardTipo2() {
-  return Card(
+  final card = Container(
     child: Column(
       children: <Widget>[
         FadeInImage(
@@ -57,6 +72,23 @@ Widget _cardTipo2() {
         ),
         Container(padding: EdgeInsets.all(10.0), child: Text('No tengo idea')),
       ],
+    ),
+  );
+
+  return Container(
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28.0),
+        color: Colors.white,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10.0,
+              spreadRadius: 2.0,
+              offset: Offset(2.0, 8.0))
+        ]),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(30.0),
+      child: card,
     ),
   );
 }
