@@ -5,7 +5,8 @@ class InputPage extends StatefulWidget {
   _InputPageState createState() => _InputPageState();
 }
 
-String _nombre;
+String _nombre = '';
+String _email = '';
 
 class _InputPageState extends State<InputPage> {
   @override
@@ -18,6 +19,10 @@ class _InputPageState extends State<InputPage> {
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         children: <Widget>[
           _creatInput(),
+          Divider(),
+          _crearEmail(),
+          Divider(),
+          _crearPassword(),
           Divider(),
           _crearPersona(),
         ],
@@ -34,11 +39,58 @@ class _InputPageState extends State<InputPage> {
         ),
         counter: Text('Letras ${_nombre.length}'),
         hintText: 'nombre de la persona',
-        labelText: 'Nombre',
+        labelText: 'nombre',
         helperText: 'Solo es nombre',
         suffixIcon: Icon(Icons.accessibility),
         icon: Icon(
           Icons.account_circle,
+        ),
+      ),
+      onChanged: (valor) {
+        setState(() {
+          _nombre = valor;
+        });
+      },
+    );
+  }
+
+  Widget _crearEmail() {
+    return TextField(
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        counter: Text('Letras ${_email.length}'),
+        hintText: 'Email de la persona',
+        labelText: 'email',
+        helperText: 'Solo es email',
+        suffixIcon: Icon(Icons.alternate_email),
+        icon: Icon(
+          Icons.email,
+        ),
+      ),
+      onChanged: (valor) {
+        setState(() {
+          _nombre = valor;
+        });
+      },
+    );
+  }
+
+  Widget _crearPassword() {
+    return TextField(
+      obscureText: true,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        counter: Text('Letras ${_email.length}'),
+        hintText: 'Password',
+        labelText: 'Password',
+        suffixIcon: Icon(Icons.lock_open),
+        icon: Icon(
+          Icons.lock_open,
         ),
       ),
       onChanged: (valor) {
