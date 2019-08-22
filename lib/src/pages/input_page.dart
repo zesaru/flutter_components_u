@@ -9,6 +9,10 @@ String _nombre = '';
 String _email = '';
 String _fecha = '';
 
+String _opcionSeleccionada = 'Volar';
+
+List<String> _poderes = ['Volar', 'Rayos X', 'Super Aliento', 'Super Fuerza'];
+
 TextEditingController _inputFieldDataController = new TextEditingController();
 
 class _InputPageState extends State<InputPage> {
@@ -28,6 +32,8 @@ class _InputPageState extends State<InputPage> {
           _crearPassword(),
           Divider(),
           _crearFecha(context),
+          Divider(),
+          _crearDropdown(),
           Divider(),
           _crearPersona(),
         ],
@@ -130,11 +136,11 @@ class _InputPageState extends State<InputPage> {
 
   _selectDate(BuildContext context) async {
     DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: new DateTime.now(),
-      firstDate: new DateTime(2018),
-      lastDate: new DateTime(2020),
-    );
+        context: context,
+        initialDate: new DateTime.now(),
+        firstDate: new DateTime(2018),
+        lastDate: new DateTime(2020),
+        locale: Locale('es', 'ES'));
     if (picked != null) {
       setState(() {
         _fecha = picked.toString();
@@ -143,9 +149,42 @@ class _InputPageState extends State<InputPage> {
     }
   }
 
+  List<DropdownMenuItem<String>> getOpcionesDropdown() {
+    List<DropdownMenuItem<String>> lista = new List();
+
+    _poderes.forEach((poder) {
+      lista.add(DropdownMenuItem(
+        child: Text(poder),
+        value: poder,
+      ));
+    });
+
+    return lista;
+  }
+
+  Widget _crearDropdown() {
+    return Row(
+      children: <Widget>[
+        SizedBox(width: 30),
+        Expanded(
+          child: DropdownButton(
+            value: _opcionSeleccionada,
+            items: getOpcionesDropdown(),
+            onChanged: (opt) {
+              setState(() {
+                _opcionSeleccionada = opt;
+              });
+            },
+          ),
+        )
+      ],
+    );
+  }
+
   Widget _crearPersona() {
     return ListTile(
       title: Text('Nombre es: $_nombre'),
+      trailing: Text(_opcionSeleccionada),
     );
   }
 }
