@@ -6,9 +6,24 @@ class ListViewPage extends StatefulWidget {
 }
 
 class _ListViewPageState extends State<ListViewPage> {
-  List<int> _listaNumeros = [10, 20, 3, 4, 5];
+  ScrollController _scrollController = new ScrollController();
+
+  List<int> _listaNumeros = new List();
+  int _ultimoItem = 0;
 
   @override
+  void initState() {
+    super.initState();
+    _agregar10();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _agregar10();
+      }
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -20,6 +35,7 @@ class _ListViewPageState extends State<ListViewPage> {
 
   Widget _crearListBuilder() {
     return ListView.builder(
+      controller: _scrollController,
       itemCount: _listaNumeros.length,
       itemBuilder: (BuildContext context, int index) {
         final imagen = _listaNumeros[index];
@@ -30,5 +46,13 @@ class _ListViewPageState extends State<ListViewPage> {
         );
       },
     );
+  }
+
+  void _agregar10() {
+    for (var i = 1; i < 10; i++) {
+      _ultimoItem++;
+      _listaNumeros.add(_ultimoItem);
+    }
+    setState(() {});
   }
 }
